@@ -42,7 +42,7 @@ La estructura de un producto en formato JSON es la siguiente:
 ### GET : Listar categorías
 Permite obtener el listado de todas las categorías disponibles en la base de datos.
 
-https://bsale-store-test-backend.herokuapp.com/api/categorías/todas
+https://bsale-store-test-backend.herokuapp.com/api/categorias/todas
 
 ### GET : Listar productos
 Permite obtener el listado de todos los productos disponibles en la base de datos.
