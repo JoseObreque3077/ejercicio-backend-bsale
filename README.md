@@ -1,7 +1,20 @@
 # API Desafío Técnico BSALE (backend)
 
 ## Descripción
-Permite obtener una lista de productos completa, filtrada por categoría o filtrada por nombre (o parte de su nombre).
+Corresponde a la primera parte de la prueba técnica para la
+postulación como Software Developer en BSALE. La actividad consiste en
+desarrollar una API REST que permita interactuar con registros de productos de una
+base de datos, considerando que estos productos deben poder ser filtrados por categoría y además ser buscados mediante
+un buscador dentro del sitio.
+
+## Resolución del Problema
+En este caso la API REST fue implementada usando el lenguaje Java y Spring Framework. Esta API permite:
+* Obtener todos los productos de la base de datos, por petición GET.
+* Obtener todas las categorías disponibles en la base de datos, por petición GET.
+* Obtener todos los productos pertenecientes a una categoría, por petición GET, en base a un ID de categoría.
+* Obtener todos los productos filtrados por nombre (o parte de este), por petición GET, en base a un string.
+
+El despliegue de la aplicación se realizó en [Heroku](https://bsale-store-test-backend.herokuapp.com).
 
 ## Estructura JSON
 ### Categoría
