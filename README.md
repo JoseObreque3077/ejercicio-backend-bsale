@@ -1,78 +1,92 @@
-# API Desafío Técnico BSALE (backend)
+# Desafío Técnico Backend: Postulación BSALE
 
 ## Descripción
-Corresponde a la primera parte de la prueba técnica para la
-postulación como Software Developer en BSALE. La actividad consiste en
-desarrollar una API REST que permita interactuar con registros de productos de una
-base de datos, considerando que estos productos deben poder ser filtrados por categoría y además ser buscados mediante
-un buscador dentro del sitio.
 
-## Resolución del Problema
-En este caso la API REST fue implementada usando el lenguaje Java y Spring Framework. Esta API permite:
-* Obtener todos los productos de la base de datos, por petición GET.
-* Obtener todas las categorías disponibles en la base de datos, por petición GET.
-* Obtener todos los productos pertenecientes a una categoría, por petición GET, en base a un ID de categoría.
-* Obtener todos los productos filtrados por nombre (o parte de este), por petición GET, en base a un string.
+El ejercicio corresponde a la primera parte del desafío técnico de postulación a la oferta laboral de Software Developer en BSALE. Se solicita la implementación de una API REST para una tienda online, tomando los siguientes puntos en consideración:
 
-El despliegue de la aplicación se realizó en [Heroku](https://bsale-store-test-backend.herokuapp.com).
+* Se deben poder mostrar los productos de acuerdo a la categoría a la cual pertenecen.
+* Se debe implementar un buscador de productos.
+
+## Desarrollo de la Aplicación
+
+Para la implementación de esta API REST se utilizó lenguaje de programación Java junto con Spring Framework. Los modelos de *producto* y *categoría* fueron creados a partir de las tablas existentes en la base de datos entregada por BSALE. Se crearon 4 endpoints para la interacción con la base de datos: tres de ellos para interactuar con la tabla de productos y uno para la interacción con la tabla de categorías.
 
 ## Estructura JSON
+
+A continuación se presentan y describen las estructuras JSON obtenidas como respuesta desde los endpoints de la API REST implementada.
+
 ### Categoría
-La estructura de una categoría en formato JSON es la siguiente:
 
-    {
-        "id": 1,
-        "name": "bebida energetica"
-    }
+La estructura JSON de un registro de la tabla de categorías es la siguiente:
 
-* id: identificador único de la categoría.
-* name: nombre de la categoría.
+```
+{
+"id": 1,
+"name": "bebida energetica"
+}
+```
+
+Donde:
+* id: Identificador único de la categoría.
+* name: Nombre de la categoría.
 
 ### Producto
-La estructura de un producto en formato JSON es la siguiente:
+La estructura JSON de un registro de la tabla de productos es la siguiente:
 
-    {
-        "id": 8,
-        "name": "PISCO ALTO DEL CARMEN 35º",
-        "urlImage": "https://dojiw2m9tvv09.cloudfront.net/11132/product/alto8532.jpg",
-        "price": 7990.0,
-        "discount": 10,
-        "category": {
-            "id": 2,
-            "name": "pisco"
-        }
+```
+{
+    "id": 8,
+    "name": "PISCO ALTO DEL CARMEN 35º",
+    "urlImage": "https://dojiw2m9tvv09.cloudfront.net/11132/product/alto8532.jpg",
+    "price": 7990.0,
+    "discount": 10,
+    "category": {
+        "id": 2,
+        "name": "pisco"
     }
+}
+```
 
-* id: identificador único de la categoría.
-* name: nombre del producto.
+Donde:
+* id: Identificador único del producto.
+* name: Nombre del producto.
 * urlImage: URL de la imagen del producto.
-* price: precio de venta del producto.
-* discount: porcentaje de descuento del producto.
-* category: categoría a la que pertenece el producto.
+* price: Precio unitario del producto.
+* discount: Porcentaje de descuento del producto.
+* category: Categoría a la que pertenece el producto.
 
 ## Endpoints
+### GET: Listar categorías
 
-### GET : Listar categorías
-Permite obtener el listado de todas las categorías disponibles en la base de datos.
+`/api/categorías/todas`
 
-https://bsale-store-test-backend.herokuapp.com/api/categorias/todas
+Retorna un arreglo con todas las categorías disponibles en la base de datos, mediante una petición GET.
 
-### GET : Listar productos
-Permite obtener el listado de todos los productos disponibles en la base de datos.
+Ejemplo de uso: *https://bsale-store-test-backend.herokuapp.com/api/categorias/todas*
 
-https://bsale-store-test-backend.herokuapp.com/api/productos/todos
+### GET: Listar productos
 
-### GET : Listar productos por categoría 
-Permite obtener el listado de productos disponibles en la base de datos, filtrados por un id de categoría.
+`/api/productos/todos`
 
-https://bsale-store-test-backend.herokuapp.com/api/productos/categoria/{id}
+Retorna un arreglo con todos los productos disponibles en la base de datos, mediante una petición GET.
 
-*Ejemplo: https://bsale-store-test-backend.herokuapp.com/api/productos/categoria/1*
+Ejemplo de uso: *https://bsale-store-test-backend.herokuapp.com/api/productos/todos*
 
-### GET: Listar productos por nombre o parte del nombre
-Permite obtener el listado de productos disponibles en la base de datos, filtrados por un texto que
-representa al nombre (o una parte del nombre) del producto.
+### GET: Listar productos por categoría
 
-https://bsale-store-test-backend.herokuapp.com/api/productos/{texto}
+`/api/productos/categoria/{id}`
 
-*Ejemplo: https://bsale-store-test-backend.herokuapp.com/api/productos/big*
+Retorna un arreglo con todos los productos disponibles en la base de datos, para un *id de categoría* específico, mediante una petición GET.
+
+Ejemplo de uso: *https://bsale-store-test-backend.herokuapp.com/api/productos/categoria/1*
+
+### GET: Listar productos por nombre
+
+`/api/productos/{nombre}`
+
+Retorna un arreglo con todos los productos disponibles en la base de datos, para un *nombre de producto (o parte de él)*, mediante una petición GET.
+
+Ejemplo de uso: *https://bsale-store-test-backend.herokuapp.com/api/productos/big*
+
+## Despliegue de la implementación
+La código de la aplicación resultante se encuentra alojado en un repositorio público en la plataforma [Github](https://github.com/JoseObreque3077/ejercicio-backend-bsale). Su despliegue fue realizado en la plataforma [Heroku](https://bsale-store-test-backend.herokuapp.com).
